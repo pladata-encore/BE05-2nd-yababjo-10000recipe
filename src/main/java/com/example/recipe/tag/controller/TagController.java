@@ -1,12 +1,13 @@
 package com.example.recipe.tag.controller;
 
 import com.example.recipe.global.domain.entity.Tag;
-import com.example.recipe.tag.dto.Request.TagRequest;
+import com.example.recipe.tag.dto.request.TagRequest;
 import com.example.recipe.tag.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequestMapping("/api/v1/tag")
 @RestController
@@ -16,15 +17,27 @@ public class TagController {
     private final TagService tagService;
 
     @PostMapping
-    void insertSave(@RequestBody TagRequest req){
-        tagService.save(req);
+//    public void save(@RequestBody TagRequest tagRequest){
+//        tagService.save(tagRequest);
+//    }
+
+    @GetMapping("/{id}")
+    public Tag findById(@PathVariable("id") Long id){return tagService.findById(id); }
+
+    @PutMapping("/update/{id}")
+    public Optional<Tag> updateTag(@RequestBody TagRequest tagRequest, @PathVariable("id") Long id) {
+
+        return  tagService.update(tagRequest, id);
     }
 
     @GetMapping
-    List<Tag> findAll(){
-
-      return  tagService.findAll();
+    public List<Tag> findALl(){
+        return tagService.findAll();
     }
+
+
+
+
 
 
 

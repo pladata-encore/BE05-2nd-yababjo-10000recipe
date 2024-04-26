@@ -1,10 +1,7 @@
 package com.example.recipe.global.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,11 +14,14 @@ import java.util.List;
 public class Sauce {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SAUCE_ID", nullable = false)
-    private int id;
+    @Column(name = "SAUCE_ID")
+    private Long id;
 
-    @Column(name = "SAUCE_NAME", nullable = false)
+    @Column(name = "SAUCE_NAME")@Setter
     private String sauceName;
+
+    @Column(name = "SAUCE_MEASUREMENT")@Setter
+    private double sauceMeasurement;
 
     @OneToMany(mappedBy = "sauce")
     private List<SauceRecipeBridge> sauceRecipeBridges;

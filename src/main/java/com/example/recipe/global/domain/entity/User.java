@@ -15,7 +15,9 @@ import java.util.List;
 @Entity
 @Table(name="USERS")
 public class User {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="USERS_ID")
     private Long id;
     @Column(name="USERS_NICKNAME")
@@ -34,7 +36,9 @@ public class User {
     private List<Comment> comments;
 
 //    @Column(name="TAG_ID" )
-//    @OneToMany(mappedBy = "tag")
+//    @OneToMany(mappedBy = "user")
 //    private List<Tag> tag;
 
+    @OneToMany(mappedBy = "user")
+    private List<Rating> ratings;
 }

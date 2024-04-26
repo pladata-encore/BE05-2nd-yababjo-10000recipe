@@ -1,10 +1,9 @@
 package com.example.recipe.global.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.List;
 
 
 @Entity
@@ -15,12 +14,13 @@ import lombok.NoArgsConstructor;
 @Table(name="TYPES")
 public class Type {
     @Id
-    @Column(name="TYPES_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="TYPE_ID")
     private Long id;
-    @Column(name="TYPES_TYPENAME")
+    @Column(name="TYPE_TYPENAME")@Setter
     private String typeName;
 
-    @JoinColumn(name="FOOD_RECIPE_ID")
-    @ManyToOne
-    private Recipe recipe;
+
+    @OneToMany(mappedBy = "type")
+    private List<Recipe> recipe;
 }
